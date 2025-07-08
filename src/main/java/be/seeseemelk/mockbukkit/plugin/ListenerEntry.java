@@ -11,8 +11,7 @@ import org.bukkit.plugin.Plugin;
  * The {@code ListenerEntry} is a class that represents a single event handler
  * of a plugin.
  */
-public class ListenerEntry
-{
+public class ListenerEntry implements AbstractListenerEntry {
 	private final Plugin plugin;
 	private final Listener listener;
 	private final Method method;
@@ -59,6 +58,7 @@ public class ListenerEntry
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
+	@Override
 	public void invoke(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		method.invoke(listener, event);
@@ -71,6 +71,7 @@ public class ListenerEntry
 	 * @param event
 	 *            The event to pass on to the method.
 	 */
+	@Override
 	public void invokeUnsafe(Event event)
 	{
 		try
@@ -91,6 +92,7 @@ public class ListenerEntry
 	 * @return {@code true} if the handler can handle that event, {@code false} if
 	 *         it can't.
 	 */
+	@Override
 	public boolean isCompatibleFor(Event event)
 	{
 		return method.getParameterCount() == 1 && method.getParameters()[0].getType().isInstance(event);

@@ -505,15 +505,14 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public boolean isPluginEnabled(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Plugin plugin = getPlugin(name);
+		return plugin != null && plugin.isEnabled();
 	}
 	
 	@Override
 	public boolean isPluginEnabled(Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return plugin.isEnabled();
 	}
 	
 	@Override
